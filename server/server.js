@@ -1,4 +1,5 @@
 import http from 'http';
+import request from 'request-promise';
 import express from 'express';
 import webpack from 'webpack';
 import webpackConfig from './../webpack.config'
@@ -18,10 +19,27 @@ app.use(webpackHotMiddleware(compiler, {
     'heartbeat': 10 * 1000
 }));
 
+app.get('/api',(req,res)=>{
+    const { real } = req.query;
+    // console.log("Params?",req.params);
+    if ( real ) {
+        request.get(`https://www.reddit.com/r/DotA2.json`)
+            .then(response=> {
+                let {data} = JSON.parse(response);
+                res.json(data);
+            })
+    } else {
+        let data = require('./news');
+        res.json({children:data});
+    }
+
+
+});
+
 const server = http.createServer(app);
 app.use(express.static('public'));
 app.use(express.static('public/css'));
 const port = process.env.PORT || 8080;
 server.listen(port,()=>{
-    console.info(`Applicatino is listening on port ${port}.`);
+    console.info(`Application is listening on port ${port}.`);
 });
