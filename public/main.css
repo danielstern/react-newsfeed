@@ -1,3 +1,14 @@
 .container {
     padding-top: calc(22em/7);
 }
+
+.article-list-item {
+    width: 36em;
+    border: calc(22em/7/12) solid #ccc;
+    border-radius: calc(22em/7/12);
+    padding: calc(22em/7/3);
+    margin: calc(22em/7/3);
+}
+.article-list-item img {
+    width: calc(100% - 22em/7);
+}

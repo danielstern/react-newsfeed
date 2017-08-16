@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+
 module.exports = {
     module: {
         loaders: [
@@ -17,7 +18,7 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
     ],
     entry: {
         "index": [
