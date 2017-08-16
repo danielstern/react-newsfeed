@@ -29,8 +29,8 @@ app.get('/api',(req,res)=>{
                 res.json(data);
             })
     } else {
-        let data = require('./news');
-        res.json({children:data});
+        let { data } = require('./news');
+        res.json(data);
     }
 
 
