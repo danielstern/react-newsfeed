@@ -21,7 +21,6 @@ app.use(webpackHotMiddleware(compiler, {
 
 app.get('/api',(req,res)=>{
     const { real } = req.query;
-    // console.log("Params?",req.params);
     if ( real ) {
         request.get(`https://www.reddit.com/r/DotA2.json`)
             .then(response=> {
@@ -32,8 +31,6 @@ app.get('/api',(req,res)=>{
         let { data } = require('./news');
         res.json(data);
     }
-
-
 });
 
 const server = http.createServer(app);
