@@ -22,7 +22,7 @@ app.use(webpackHotMiddleware(compiler, {
 app.get('/api',(req,res)=>{
     const { real } = req.query;
     if ( real ) {
-        request.get(`https://www.reddit.com/r/DotA2.json`)
+        request.get(`https://www.reddit.com/r/gwent.json`)
             .then(response=> {
                 let {data} = JSON.parse(response);
                 res.json(data);

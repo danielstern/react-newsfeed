@@ -15,9 +15,12 @@ let ArticleListItem = ({url,selftext,title,score,num_comments})=>(
             {truncate(selftext)}
         </p>
         {url ? <img src={url}/> : null}
-        <div>
+        <section>
             Comments: {num_comments}
-        </div>
+        </section>
+        <section>
+            Score: {score}
+        </section>
     </div>
 )
 fetch(`api?real=true`)
@@ -27,7 +30,8 @@ fetch(`api?real=true`)
     let state = {
         data:data.children.map(c=>c.data),
         articlesPerPage:10,
-        articleViewMode:`ALL`
+        articleViewMode:`ALL`,
+        articleSort:`LATEST`
     };
 
     render(state);
@@ -37,6 +41,11 @@ const render = state=>{
     const handleArticleViewModeChange = e=>{
         state = {...state,articleViewMode:e.target.value};
         console.log(state);
+        render(state);
+    };
+
+    const handleArticleSortChange = e=>{
+        state = {...state,articleSort:e.target.value};
         render(state);
     };
     const articlePictureFilter = article=>state.articleViewMode === "PICS" ? article.url && /png|jpg|imgur/.test(article.url) : true
@@ -57,14 +66,14 @@ const render = state=>{
                         Only Articles With Pictures
                     </option>
                 </select>
-                <select onChange={handleArticleViewModeChange} className="form-control">
+                <select onChange={handleArticleSortChange} className="form-control">
                     <option value="LATEST">
                         Sort By Latest
                     </option>
                     <option value="SCORE">
                         Sort By Score
                     </option>
-                    <option value="">
+                    <option value="COMMENTS">
                         Sort by Number of Comments
                     </option>
                 </select>
@@ -72,6 +81,16 @@ const render = state=>{
 
             <div>
                 {state.data
+                    .sort((a,b)=>{
+                        switch (state.articleSort) {
+                            case `LATEST`:
+                                return b.created - a.created;
+                            case `SCORE`:
+                                return b.score - a.score;
+                            case `COMMENTS`:
+                                return b.num_comments - a.num_comments;
+                        }
+                    })
                     .filter(articlePictureFilter)
                     .map(article=>< ArticleListItem {...article} key={article.id}/>)}
             </div>
