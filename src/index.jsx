@@ -1,28 +1,9 @@
 import fetch from 'isomorphic-fetch';
 import React from 'react';
 import reactDOM from 'react-dom'
+import { urlContainsImage } from './filters'
+import { ArticleListItem } from './components'
 
-
-let truncate = string=>`${string.slice(0,140)}${string.length > 140 ? '...' : ''}`;
-let ArticleListItem = ({url,selftext,title,score,num_comments})=>(
-    <div className="article-list-item">
-        <h3>
-            <a href={url} target="blank">
-                {title}
-            </a>
-        </h3>
-        <p>
-            {truncate(selftext)}
-        </p>
-        {url ? <img src={url}/> : null}
-        <section>
-            Comments: {num_comments}
-        </section>
-        <section>
-            Score: {score}
-        </section>
-    </div>
-)
 fetch(`api?real=true`)
 .then(r=>r.json())
 .then(data=>{
@@ -37,6 +18,8 @@ fetch(`api?real=true`)
     render(state);
 });
 
+// const urlContainsImage = url => url && /png|jpg|imgur/.test(url);
+
 const render = state=>{
     const handleArticleViewModeChange = e=>{
         state = {...state,articleViewMode:e.target.value};
@@ -48,7 +31,8 @@ const render = state=>{
         state = {...state,articleSort:e.target.value};
         render(state);
     };
-    const articlePictureFilter = article=>state.articleViewMode === "PICS" ? article.url && /png|jpg|imgur/.test(article.url) : true
+
+    const articlePictureFilter = article=>state.articleViewMode === "PICS" ? urlContainsImage(article.url) : true
     reactDOM.render(
         <div>
             <h2>

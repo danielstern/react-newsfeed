@@ -4,7 +4,7 @@
 }
 
 .article-list-item {
-    width: 36em;
+    width: 100%;
     border: calc(22em/7/12) solid #ccc;
     border-radius: calc(22em/7/12);
     padding: calc(22em/7/3);

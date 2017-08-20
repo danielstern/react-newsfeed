@@ -1,0 +1,1 @@
+export { urlContainsImage } from './urlContainsImage';
