@@ -1,7 +1,5 @@
 import React from 'react';
-import { urlContainsImage } from '../filters'
-
-const truncate = string=>`${string.slice(0,140)}${string.length > 280 ? '...' : ''}`;
+import { urlContainsImage, truncate } from '../filters'
 
 export const ArticleListItem = ({url,selftext,title,score,num_comments,permalink})=>(
     <div className="article-list-item">

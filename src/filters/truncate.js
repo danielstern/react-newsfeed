@@ -1,0 +1,1 @@
+export const truncate = string=>`${string.slice(0,140)}${string.length > 280 ? '...' : ''}`;
