@@ -17,18 +17,18 @@ fetch(`api?real=true`)
     render(state);
 });
 
-const handleArticleViewModeChange = state => e=>{
-    state = {...state,articleViewMode:e.target.value};
-    console.log(state);
-    render(state);
-};
-
-const handleArticleSortChange = state => e=>{
-    state = {...state,articleSort:e.target.value};
-    render(state);
-};
+console.log("Render app");
 
 const render = state=>{
+    const handleArticleViewModeChange = e=>{
+        state = {...state,articleViewMode:e.target.value};
+        render(state);
+    };
+
+    const handleArticleSortChange = e=>{
+        state = {...state,articleSort:e.target.value};
+        render(state);
+    };
     reactDOM.render(
         <Main
             {...state}

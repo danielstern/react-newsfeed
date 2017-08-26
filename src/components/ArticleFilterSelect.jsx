@@ -1,6 +1,9 @@
 import React from 'react';
 
-export const ArticleFilterSelect = ({handleArticleViewModeChange,handleArticleSortChange})=>(
+export const ArticleFilterSelect = ({handleArticleViewModeChange,handleArticleSortChange})=>{
+    console.log("Things,",handleArticleViewModeChange);
+    const test = ()=>{console.log("TEST!")};
+    return (
     <section className="controls">
         <select onChange={handleArticleViewModeChange} className="form-control filter-select">
             <option value="ALL">
@@ -22,4 +25,4 @@ export const ArticleFilterSelect = ({handleArticleViewModeChange,handleArticleSo
             </option>
         </select>
     </section>
-);
+)};
