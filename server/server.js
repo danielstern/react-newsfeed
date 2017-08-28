@@ -36,7 +36,7 @@ app.get('/api',(req,res)=>{
 const server = http.createServer(app);
 app.use(express.static('public'));
 app.use(express.static('public/css'));
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 server.listen(port,()=>{
     console.info(`Application is listening on port ${port}.`);
 });
